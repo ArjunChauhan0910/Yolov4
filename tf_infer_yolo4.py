@@ -44,19 +44,16 @@ with open( 'pretrained/modified_classes.txt', 'r', encoding='utf-8-sig') as f:
 #if u want you also can set detector.palette (list of color)
 
 
-imgs=glob.glob('images/*.*g')
-imgs=[img for img in imgs if   '_infered' not in  img]
-print('total {0} images'.format(len(imgs)))
+cam = cv2.VideoCapture(0)
 
-
-is_drawing = True
-for i in range(len(imgs)):
-    folder, filename, ext = split_path(imgs[i])
-    if is_drawing:
-        img = detector.infer_then_draw_single_image(imgs[i], verbose=True)
-        if is_small_item_enhance:
-            array2image(img).save(imgs[i].replace(filename, filename + '_tf_infered_enhance'))
-        else:
-            array2image(img).save(imgs[i].replace(filename, filename + '_tf_infered'))
-    else:
-        detector.infer_single_image(imgs[i], verbose=True)
+while(True):
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    img = detector.infer_then_draw_single_image(frame, verbose=True)
+    img =  array2image(img)
+    cv2.imshow('Detected',img)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+      
+cap.release()
+cv2.destroyAllWindows()
