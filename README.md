@@ -1,7 +1,7 @@
 ## Yolo v4 for pytorch , tensorflow eager mode and onnx (by trident api)
 
 
-This code is an adaptation of from https://github.com/AllanYiin/YoloV4
+This code is an adaptation of https://github.com/AllanYiin/YoloV4
 ### How to install 
 
 trident only support python 3.x     
